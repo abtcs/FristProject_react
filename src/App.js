@@ -2,13 +2,8 @@
 function ProductCard(props) {
   return (
     <div style={{ border: "1px solid #ccc", padding: "10px", margin: "10px", borderRadius: "5px" }}>
-      {/* Displaying the product name */}
       <h3>{props.name}</h3>
-      
-      {/* Displaying the price */}
       <p>Price: ${props.price}</p>
-      
-      {/* JavaScript conditional (ternary) operator for stock status */}
       {props.isAvailable ? (
         <span style={{ color: "green", fontWeight: "bold" }}>In Stock</span>
       ) : (
@@ -27,7 +22,7 @@ const productsDetails = [
     price: 999, 
     isAvailable: true, 
     qty: 123, 
-    imageLink: "https://picsum.photos/id/0/500/300" // Stable laptop photo
+    imageLink: "https://picsum.photos/id/0/500/300" 
   },
   { 
     id: 2, 
@@ -35,7 +30,7 @@ const productsDetails = [
     price: 199, 
     isAvailable: false, 
     qty: 0, 
-    imageLink: "https://picsum.photos/id/26/500/300" // Stable tech gadget photo
+    imageLink: "https://picsum.photos/id/26/500/300" 
   },
   { 
     id: 3, 
@@ -43,7 +38,7 @@ const productsDetails = [
     price: 89, 
     isAvailable: true, 
     qty: 50, 
-    imageLink: "https://picsum.photos/id/60/500/300" // Stable desktop/typing photo
+    imageLink: "https://picsum.photos/id/60/500/300" 
   },
   { 
     id: 4, 
@@ -51,7 +46,7 @@ const productsDetails = [
     price: 49, 
     isAvailable: true, 
     qty: 200, 
-    imageLink: "https://picsum.photos/id/201/500/300" // Stable setup photo
+    imageLink: "https://picsum.photos/id/201/500/300" 
   },
 ];
 

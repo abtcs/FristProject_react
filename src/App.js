@@ -1,104 +1,78 @@
-import "./sky.css";
-import { useState } from "react";
 
-const geoURL = "https://geocoding-api.open-meteo.com/v1/search?name=";
-const weatherURL =
-  "https://api.open-meteo.com/v1/forecast?current_weather=true&latitude=";
 
-export default function App() {
-  const [city, setCity] = useState("");
-  const [temp, setTemp] = useState(null);
-  const [isDay, setIsDay] = useState(null);
 
-  const getWeather = async () => {
-    if (!city) return;
-
-    try {
-      // 1️⃣ Get latitude & longitude from city name
-      const geoRes = await fetch(geoURL + city);
-      const geoData = await geoRes.json();
-
-      if (!geoData.results || geoData.results.length === 0) {
-        alert("City not found");
-        return;
-      }
-
-      const lat = geoData.results[0].latitude;
-      const lon = geoData.results[0].longitude;
-
-      // 2️⃣ Get weather using lat & lon
-      const weatherRes = await fetch(
-        `${weatherURL}${lat}&longitude=${lon}`
-      );
-      const weatherData = await weatherRes.json();
-
-      setTemp(weatherData.current_weather.temperature);
-      setIsDay(weatherData.current_weather.is_day);
-    } catch (err) {
-      console.error(err);
-      alert("Error fetching weather");
-    }
-  };
-
-  if (isDay === null)
-    return (
-      <div className="sky day">
-        <div className="weather-card">
-          <h2>Enter city to see weather</h2>
-          <input
-            type="text"
-            placeholder="Enter city name..."
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <button onClick={getWeather}>Get Weather</button>
-        </div>
-      </div>
-    );
-
-  const day = isDay === 1;
-
+function ProductCard(props) {
   return (
-    <div className={day ? "sky day" : "sky night"}>
-      {day ? <Sun /> : <NightSky />}
-      <Clouds />
-
-      <div className="weather-card" style={{ color: day ? "black" : "white" }}>
-        <input
-          type="text"
-          placeholder="Enter city name..."
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-        <button onClick={getWeather}>Get Weather</button>
-
-        <h1>{temp}°C</h1>
-        <h2>{day ? "Sunny Day" : "Starry Night"}</h2>
-      </div>
+    <div style={{ border: "1px solid #ccc", padding: "10px", margin: "10px", borderRadius: "5px" }}>
+      {/* Displaying the product name */}
+      <h3>{props.name}</h3>
+      
+      {/* Displaying the price */}
+      <p>Price: ${props.price}</p>
+      
+      {/* JavaScript conditional (ternary) operator for stock status */}
+      {props.isAvailable ? (
+        <span style={{ color: "green", fontWeight: "bold" }}>In Stock</span>
+      ) : (
+        <span style={{ color: "red", fontWeight: "bold" }}>Out of Stock</span>
+      )}
+      <p>Quantity: {props.qty}</p>
+      <img src={props.imageLink} alt={props.name} style={{ width: "100px", height: "100px" }} />
     </div>
   );
 }
 
-function Sun() {
-  return <div className="sun" />;
-}
+const productsDetails = [
+  { 
+    id: 1, 
+    name: "Laptop", 
+    price: 999, 
+    isAvailable: true, 
+    qty: 123, 
+    imageLink: "https://picsum.photos/id/0/500/300" // Stable laptop photo
+  },
+  { 
+    id: 2, 
+    name: "Headphones", 
+    price: 199, 
+    isAvailable: false, 
+    qty: 0, 
+    imageLink: "https://picsum.photos/id/26/500/300" // Stable tech gadget photo
+  },
+  { 
+    id: 3, 
+    name: "Keyboard", 
+    price: 89, 
+    isAvailable: true, 
+    qty: 50, 
+    imageLink: "https://picsum.photos/id/60/500/300" // Stable desktop/typing photo
+  },
+  { 
+    id: 4, 
+    name: "Mouse", 
+    price: 49, 
+    isAvailable: true, 
+    qty: 200, 
+    imageLink: "https://picsum.photos/id/201/500/300" // Stable setup photo
+  },
+];
 
-function Clouds() {
+export default function App() {
   return (
-    <>
-      <div className="cloud cloud1" />
-      <div className="cloud cloud2" />
-    </>
-  );
-}
+    <div>
+      <h1>My Tech Shop</h1>
 
-function NightSky() {
-  return (
-    <>
-      <div className="moon" />
-      <div className="stars" />
-      <div className="shooting-star" />
-      <div className="shooting-star1" />
-    </>
+      {productsDetails.map((product, index) => (
+        <ProductCard 
+          key={index}
+          name={product.name}
+          price={product.price}
+          isAvailable={product.isAvailable}
+          qty={product.qty}
+          imageLink={product.imageLink}
+        />
+      ))}
+
+    </div>
   );
 }

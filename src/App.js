@@ -63,7 +63,7 @@ export default function App() {
             onClick={() => setCurrentScreen('shop')}
             style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
           >
-            Shop
+            To Do List
           </button>
           <button
             onClick={() => setCurrentScreen('cart')}

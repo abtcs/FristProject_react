@@ -1,5 +1,6 @@
 import { useState } from 'react'; // 1. Import useState
 import Cart from './Cart';       // 2. Import your new Cart file
+import RealTimeData from './RealTimeData'; // Import RealTimeData component
 
 function ProductCard(props) {
   return (
@@ -25,39 +26,64 @@ const productsDetails = [
 ];
 
 export default function App() {
-  // 3. Track which screen to show ('shop' or 'cart')
+  // 3. Track which screen to show ('shop', 'cart', or 'RealTimeData')
   const [currentScreen, setCurrentScreen] = useState('shop');
 
-  // 4. CONDITIONAL NAVIGATION: If currentScreen is 'cart', swap the UI entirely
-  if (currentScreen === 'cart') {
-    return <Cart onBack={() => setCurrentScreen('shop')} />;
-  }
+  const renderScreen = () => {
+    if (currentScreen === 'cart') {
+      return <Cart onBack={() => setCurrentScreen('shop')} />;
+    }
 
-  // Otherwise, show your original Tech Shop UI
+    if (currentScreen === 'RealTimeData') {
+      return <RealTimeData />;
+    }
+
+    return (
+      <div>
+        {productsDetails.map((product, index) => (
+          <ProductCard 
+            key={index}
+            name={product.name}
+            price={product.price}
+            isAvailable={product.isAvailable}
+            qty={product.qty}
+            imageLink={product.imageLink}
+          />
+        ))}
+      </div>
+    );
+  };
+
   return (
-    <div style={{ padding: "20px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <div style={{ padding: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
         <h1>My Tech Shop</h1>
-        
-        {/* 5. The "href" button: Clicking this changes state to 'cart' */}
-        <button 
-          onClick={() => setCurrentScreen('cart')}
-          style={{ padding: "10px 20px", cursor: "pointer", fontWeight: "bold" }}
-        >
-          🛒 Go to Cart
-        </button>
+
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          <button
+            onClick={() => setCurrentScreen('shop')}
+            style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            Shop
+          </button>
+          <button
+            onClick={() => setCurrentScreen('cart')}
+            style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            🛒 Go to Cart
+          </button>
+          <button
+            onClick={() => setCurrentScreen('RealTimeData')}
+            style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            Real-Time Data
+          </button>
+        </div>
       </div>
 
-      {productsDetails.map((product, index) => (
-        <ProductCard 
-          key={index}
-          name={product.name}
-          price={product.price}
-          isAvailable={product.isAvailable}
-          qty={product.qty}
-          imageLink={product.imageLink}
-        />
-      ))}
+      <div style={{ marginTop: '20px' }}>
+        {renderScreen()}
+      </div>
     </div>
   );
 }

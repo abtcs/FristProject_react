@@ -1,6 +1,6 @@
-import { useState } from 'react'; // 1. Import useState
-import Cart from './Cart';       // 2. Import your new Cart file
-import RealTimeData from './RealTimeData'; // Import RealTimeData component
+import { useState } from 'react'; 
+import Cart from './Cart';     
+import RealTimeData from './RealTimeData'; 
 
 function ProductCard(props) {
   return (
@@ -26,7 +26,6 @@ const productsDetails = [
 ];
 
 export default function App() {
-  // 3. Track which screen to show ('shop', 'cart', or 'RealTimeData')
   const [currentScreen, setCurrentScreen] = useState('shop');
 
   const renderScreen = () => {

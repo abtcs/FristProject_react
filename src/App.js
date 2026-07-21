@@ -25,40 +25,31 @@ const productsDetails = [
   { id: 3, name: "Keyboard", price: 89, isAvailable: true, qty: 50, imageLink: "https://picsum.photos/id/60/500/300" },
   { id: 4, name: "Mouse", price: 49, isAvailable: true, qty: 200, imageLink: "https://picsum.photos/id/201/500/300" },
 ];
+function Shop() {
+  return (
+    <div>
+      {productsDetails.map((product) => (
+        <ProductCard 
+          key={product.id}
+          {...product}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState('shop');
 
-  const renderScreen = () => {
-    if (currentScreen === 'cart') {
-      return <Cart onBack={() => setCurrentScreen('shop')} />;
-    }
+  const screens = [
+    { id: 'shop', label: 'To Do List', element: <Shop /> },
+    { id: 'cart', label: '🛒 Go to Cart', element: <Cart onBack={() => setCurrentScreen('shop')} /> },
+    { id: 'RealTimeData', label: 'Real-Time Data', element: <RealTimeData /> },
+    { id: 'DarkMode', label: 'Dark Mode', element: <DarkMode /> },
+    { id: 'CounterApp', label: 'Counter App', element: <CounterApp /> }
+  ];
 
-    if (currentScreen === 'RealTimeData') {
-      return <RealTimeData />;
-    }
-
-    if(currentScreen === 'DarkMode') {
-      return <DarkMode />;
-    }
-    if(currentScreen === 'CounterApp') {
-      return <CounterApp />;
-    }
-
-    return (
-      <div>
-        {productsDetails.map((product, index) => (
-          <ProductCard 
-            key={index}
-            name={product.name}
-            price={product.price}
-            isAvailable={product.isAvailable}
-            qty={product.qty}
-            imageLink={product.imageLink}
-          />
-        ))}
-      </div>
-    );
-  };
+  const activeScreen = screens.find((screen) => screen.id === currentScreen) ?? screens[0];
 
   return (
     <div style={{ padding: '20px' }}>
@@ -66,41 +57,20 @@ export default function App() {
         <h1>My Tech Shop</h1>
 
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          <button
-            onClick={() => setCurrentScreen('shop')}
-            style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
-          >
-            To Do List
-          </button>
-          <button
-            onClick={() => setCurrentScreen('cart')}
-            style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
-          >
-            🛒 Go to Cart
-          </button>
-          <button
-            onClick={() => setCurrentScreen('RealTimeData')}
-            style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
-          >
-            Real-Time Data
-          </button>
-          <button
-            onClick={() => setCurrentScreen('DarkMode')}
-            style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
-          >
-            Dark Mode
-          </button>
-          <button
-            onClick={() => setCurrentScreen('CounterApp')}
-            style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
-          >
-            Counter App
-          </button>
+          {screens.map((screen) => (
+            <button
+              key={screen.id}
+              onClick={() => setCurrentScreen(screen.id)}
+              style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
+            >
+              {screen.label}
+            </button>
+          ))}
         </div>
       </div>
 
       <div style={{ marginTop: '20px' }}>
-        {renderScreen()}
+        {activeScreen.element}
       </div>
     </div>
   );

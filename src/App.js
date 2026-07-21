@@ -25,6 +25,7 @@ const productsDetails = [
   { id: 3, name: "Keyboard", price: 89, isAvailable: true, qty: 50, imageLink: "https://picsum.photos/id/60/500/300" },
   { id: 4, name: "Mouse", price: 49, isAvailable: true, qty: 200, imageLink: "https://picsum.photos/id/201/500/300" },
 ];
+
 function Shop() {
   return (
     <div>

@@ -38,6 +38,7 @@ function Shop() {
   );
 }
 
+
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState('shop');
 

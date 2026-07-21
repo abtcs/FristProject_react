@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Cart from './Cart';     
 import RealTimeData from './RealTimeData'; 
 import DarkMode from './DarkMode';
+import CounterApp from './CounterApp';
 
 function ProductCard(props) {
   return (
@@ -38,6 +39,9 @@ export default function App() {
 
     if(currentScreen === 'DarkMode') {
       return <DarkMode />;
+    }
+    if(currentScreen === 'CounterApp') {
+      return <CounterApp />;
     }
 
     return (
@@ -85,6 +89,12 @@ export default function App() {
             style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
           >
             Dark Mode
+          </button>
+          <button
+            onClick={() => setCurrentScreen('CounterApp')}
+            style={{ padding: '10px 20px', cursor: 'pointer', fontWeight: 'bold' }}
+          >
+            Counter App
           </button>
         </div>
       </div>

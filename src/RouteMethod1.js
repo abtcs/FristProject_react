@@ -10,7 +10,6 @@ export default function RouteMethod1() {
         <Link to="/" style={{ marginRight: '10px' }}>Home</Link>
         <Link to="/about">About</Link>
       </nav>
-
       <div style={{ padding: '20px' }}>
         <Routes>
           <Route path="/" element={<Home />} />

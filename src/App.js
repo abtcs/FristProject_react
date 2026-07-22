@@ -50,7 +50,7 @@ export default function App() {
     { id: 'RealTimeData', label: 'Real-Time Data', element: <RealTimeData /> },
     { id: 'DarkMode', label: 'Dark Mode', element: <DarkMode /> },
     { id: 'CounterApp', label: 'Counter App', element: <CounterApp /> },
-    { id: 'RouteMethod1', label: 'Routing Method 1', element: <RouteMethod1 /> },
+    { id: 'RouteMethod1', label: 'Routing Method 1', element: <RouteMethod1 /> }
   ];
 
   const activeScreen = screens.find((screen) => screen.id === currentScreen) ?? screens[0];

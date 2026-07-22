@@ -3,6 +3,7 @@ import Cart from './Cart';
 import RealTimeData from './RealTimeData'; 
 import DarkMode from './DarkMode';
 import CounterApp from './CounterApp';
+import RouteMethod1 from './RouteMethod1';
 
 function ProductCard(props) {
   return (
@@ -48,7 +49,8 @@ export default function App() {
     { id: 'cart', label: '🛒 Go to Cart', element: <Cart onBack={() => setCurrentScreen('shop')} /> },
     { id: 'RealTimeData', label: 'Real-Time Data', element: <RealTimeData /> },
     { id: 'DarkMode', label: 'Dark Mode', element: <DarkMode /> },
-    { id: 'CounterApp', label: 'Counter App', element: <CounterApp /> }
+    { id: 'CounterApp', label: 'Counter App', element: <CounterApp /> },
+    { id: 'RouteMethod1', label: 'Routing Method 1', element: <RouteMethod1 /> },
   ];
 
   const activeScreen = screens.find((screen) => screen.id === currentScreen) ?? screens[0];

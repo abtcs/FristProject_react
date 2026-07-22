@@ -9,13 +9,11 @@ export default function RouteMethod1() {
   return (
     <BrowserRouter>
       <nav style={{ padding: '10px', background: '#f0f0f0' }}>
-        {/* DO NOT use <a href="..."> — it forces a full page reload! */}
         <Link to="/" style={{ marginRight: '10px' }}>Home</Link>
         <Link to="/about">About</Link>
       </nav>
 
       <div style={{ padding: '20px' }}>
-        {/* React Router checks the current URL and renders the matching Route */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
